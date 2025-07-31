@@ -1,0 +1,52 @@
+#!/bin/bash
+# Universal AI-Safe Terminal Launcher
+# Auto-detects platform and routes to appropriate backend
+
+# Detect platform
+detect_platform() {
+    case "$OSTYPE" in
+        darwin*)  echo "macos" ;;
+        linux*)   echo "linux" ;;
+        cygwin*|mingw*|msys*) echo "windows" ;;
+        *) 
+            if [[ "$OS" == "Windows_NT" ]]; then
+                echo "windows"
+            else
+                echo "unix"
+            fi
+            ;;
+    esac
+}
+
+# Get script directory
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PLATFORM=$(detect_platform)
+
+# Route to appropriate backend
+case "$PLATFORM" in
+    "macos"|"linux"|"unix")
+        if [[ -f "$SCRIPT_DIR/unified-terminal-system.sh" ]]; then
+            exec "$SCRIPT_DIR/unified-terminal-system.sh" "$@"
+        else
+            echo "Error: unified-terminal-system.sh not found in $SCRIPT_DIR"
+            exit 1
+        fi
+        ;;
+    "windows")
+        if command -v powershell >/dev/null 2>&1; then
+            if [[ -f "$SCRIPT_DIR/unified-terminal-system.ps1" ]]; then
+                exec powershell -ExecutionPolicy Bypass -File "$SCRIPT_DIR/unified-terminal-system.ps1" "$@"
+            else
+                echo "Error: unified-terminal-system.ps1 not found in $SCRIPT_DIR"
+                exit 1
+            fi
+        else
+            echo "Error: PowerShell not found. Install PowerShell for Windows support."
+            exit 1
+        fi
+        ;;
+    *)
+        echo "Error: Unsupported platform: $PLATFORM"
+        exit 1
+        ;;
+esac

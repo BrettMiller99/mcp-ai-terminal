@@ -1,0 +1,75 @@
+{
+  "mcpServers": {
+    "ai-safe-terminal": {
+      "command": "python3",
+      "args": ["/path/to/mcp-ai-terminal-server.py"],
+      "env": {
+        "AI_TERMINAL_TIMEOUT": "8",
+        "AI_TERMINAL_BG_TIMEOUT": "300",
+        "AI_TERMINAL_OUTPUT_DIR": "/tmp/ai-terminal-outputs",
+        "AI_TERMINAL_LOG_LEVEL": "INFO"
+      }
+    }
+  },
+  
+  "_examples": {
+    "claude_desktop": {
+      "mcpServers": {
+        "ai-safe-terminal": {
+          "command": "python3",
+          "args": ["/Users/you/.local/bin/mcp-ai-terminal-server.py"]
+        }
+      }
+    },
+    
+    "vscode_cascade": {
+      "cascade.mcpServers": {
+        "ai-safe-terminal": {
+          "command": "python3",
+          "args": ["/usr/local/bin/mcp-ai-terminal-server.py"],
+          "cwd": "${workspaceFolder}"
+        }
+      }
+    },
+    
+    "cursor_ide": {
+      "mcpServers": {
+        "ai-safe-terminal": {
+          "command": "python",
+          "args": ["C:\\tools\\mcp-ai-terminal-server.py"],
+          "env": {
+            "AI_TERMINAL_OUTPUT_DIR": "C:\\temp\\ai-terminal-outputs"
+          }
+        }
+      }
+    },
+    
+    "development": {
+      "mcpServers": {
+        "ai-safe-terminal": {
+          "command": "python3",
+          "args": ["/path/to/mcp-ai-terminal-server.py", "--debug"],
+          "env": {
+            "AI_TERMINAL_TIMEOUT": "15",
+            "AI_TERMINAL_DEBUG": "true",
+            "AI_TERMINAL_TRACE_COMMANDS": "true"
+          }
+        }
+      }
+    },
+    
+    "production": {
+      "mcpServers": {
+        "ai-safe-terminal": {
+          "command": "python3",
+          "args": ["/usr/bin/mcp-ai-terminal-server.py"],
+          "env": {
+            "AI_TERMINAL_TIMEOUT": "5",
+            "AI_TERMINAL_STRICT_MODE": "true",
+            "AI_TERMINAL_LOG_FILE": "/var/log/ai-terminal-mcp.log"
+          }
+        }
+      }
+    }
+  }
+}
