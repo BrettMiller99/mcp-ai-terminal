@@ -222,19 +222,7 @@ self.long_patterns = ["install", "download", "clone", "sync"]
 
 ## 🤝 Integration Examples
 
-### VS Code with Cascade
-```json
-{
-  "cascade.mcpServers": {
-    "ai-safe-terminal": {
-      "command": "python",
-      "args": ["/usr/local/bin/mcp-ai-terminal-server.py"]
-    }
-  }
-}
-```
-
-### Claude Desktop
+### MCP Config
 ```json
 {
   "mcpServers": {
